@@ -3,10 +3,11 @@ import p from "../assets/p.jpg";
 
 export default function About() {
   const stats = [
-    { label: "Experience", value: "1+ years" },
-    { label: "Speciality", value: "Front-End" },
-    { label: "Focus", value: "React Development" },
+    { label: "Projects", value: "3+" },
+    { label: "Technologies", value: "12+" },
+    { label: "Education", value: "NITSRI" },
   ];
+
   const glows = [
     "-top-10 -left-10 w-[360px] h-[360px] opacity-20 blur-[120px]",
     "bottom-0 right-10 w-[420px] h-[420px] opacity-15 blur-[140px] delay-300",
@@ -41,7 +42,7 @@ export default function About() {
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 200, damping: 18 }}
           >
-            <img src={p} alt="profile" className="absolute inset-0" />
+            <img src={p} alt="Pratyaksh Kalsi" className="absolute inset-0 w-full h-full object-cover" />
           </motion.div>
           <div className="flex-1 flex flex-col justify-center text-center md:text-left">
             <h2
@@ -54,23 +55,23 @@ export default function About() {
               Frontend Developer
             </p>
             <p className="mt-4 text-gray-300 leading-relaxed text-base sm:text-lg max-w-2xl md:max-w-3xl">
-              A curious builder who loves mixing creativity with code. I enjoy
-              turning ideas into clean, functional digital experiences. Skilled
-              in web development, React, UI design, and exploring AI, learning
-              something fresh with every project.
+              A curious builder who loves mixing creativity with code. I craft
+              smooth, modern interfaces using React and Next.js while exploring
+              how AI can power smarter products. I believe in making digital
+              experiences that are simple, beautiful, and enjoyable.
             </p>
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-xl">
+            <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-4 max-w-md">
               {stats.map((item, i) => (
                 <motion.div
                   key={i}
-                  className="rounded-xl boder border-white/10 bg-white/5 px-4 py-3 text-center"
+                  className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-center"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.05 * i, duration: 0.4 }}
                   viewport={{ once: true, amount: 0.3 }}
                 >
+                  <div className="text-xl sm:text-2xl font-bold">{item.value}</div>
                   <div className="text-sm text-gray-400">{item.label}</div>
-                  <div className="text-base font-semibold">{item.value}</div>
                 </motion.div>
               ))}
             </div>
@@ -89,25 +90,6 @@ export default function About() {
               </a>
             </div>
           </div>
-        </motion.div>
-        <motion.div
-          className="text-center md:text-left"
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.4 }}
-        >
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            About Me
-          </h3>
-          <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
-            I am a frontend engineer focused on crafting smooth, modern
-            interfaces while learning how AI can power smarter products.
-          </p>
-          <p className="mt-4 text-gray-400 text-base sm:text-lg">
-            I love making digital experiences that are simple, modern, and
-            enjoyable for people.
-          </p>
         </motion.div>
       </div>
     </section>

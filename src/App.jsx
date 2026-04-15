@@ -1,6 +1,7 @@
+import { motion } from "framer-motion";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
-import ParticlesBackground from "./components/ParticlesBackground";
+import ScrollProgress from "./components/ScrollProgress";
 import About from "./sections/About";
 import Contact from "./sections/Contact";
 import Experience from "./sections/Experience";
@@ -11,9 +12,14 @@ import Skills from "./sections/Skills";
 
 export default function App() {
   return (
-    <div className="relative gradient text-white">
+    <motion.div
+      className="relative gradient text-white"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <ScrollProgress />
       <CustomCursor />
-      {/* <ParticlesBackground /> */}
       <Navbar />
       <Home />
       <About />
@@ -22,6 +28,6 @@ export default function App() {
       <Experience />
       <Contact />
       <Footer />
-    </div>
+    </motion.div>
   );
 }

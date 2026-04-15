@@ -1,7 +1,7 @@
 import { FaPython, FaReact, FaGithub } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { IoLogoJavascript } from "react-icons/io5";
-import { SiReactrouter } from "react-icons/si";
+import { SiReactrouter, SiNextdotjs, SiSupabase, SiStyledcomponents, SiVite } from "react-icons/si";
 import { DiNodejsSmall } from "react-icons/di";
 import { TbBrandCpp } from "react-icons/tb";
 import { motion, useMotionValue } from "framer-motion";
@@ -9,14 +9,18 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Skills() {
   const skills = [
-    { icon: <FaPython />, name: "Python" },
-    { icon: <RiTailwindCssFill />, name: "Tailwind CSS" },
     { icon: <FaReact />, name: "React" },
+    { icon: <SiNextdotjs />, name: "Next.js" },
     { icon: <IoLogoJavascript />, name: "JavaScript" },
-    { icon: <SiReactrouter />, name: "React Router" },
-    { icon: <TbBrandCpp />, name: "C++" },
-    { icon: <FaGithub />, name: "GitHub" },
+    { icon: <RiTailwindCssFill />, name: "Tailwind CSS" },
+    { icon: <SiSupabase />, name: "Supabase" },
     { icon: <DiNodejsSmall />, name: "Node.js" },
+    { icon: <FaPython />, name: "Python" },
+    { icon: <SiStyledcomponents />, name: "Styled Components" },
+    { icon: <SiReactrouter />, name: "React Router" },
+    { icon: <SiVite />, name: "Vite" },
+    { icon: <FaGithub />, name: "GitHub" },
+    { icon: <TbBrandCpp />, name: "C++" },
   ];
 
   const repeated = [...skills, ...skills, ...skills];

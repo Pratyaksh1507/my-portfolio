@@ -14,13 +14,13 @@ const socials = [
   { Icon: FaGithub, label: "GitHub", href: "https://github.com/Pratyaksh1507" },
 ];
 
-const glowVarients = {
-  initial: { scale: 1, y: 0, filter: "drop-shadow (0 0 0 rgba(0,0,0,0))" },
+const glowVariants = {
+  initial: { scale: 1, y: 0, filter: "drop-shadow(0 0 0 rgba(0,0,0,0))" },
   hover: {
     scale: 1.2,
     y: -3,
     filter:
-      "drop-shadow(0,0 8px rgba(13,88,204,0.9)) drop-shadow(0 0 18px rgba(16,185,129,0.8))",
+      "drop-shadow(0 0 8px rgba(13,88,204,0.9)) drop-shadow(0 0 18px rgba(16,185,129,0.8))",
     transition: { type: "spring", stiffness: 300, damping: 15 },
   },
   tap: { scale: 0.95, y: 0, transition: { duration: 0.08 } },
@@ -96,7 +96,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              I'm a developer focused on clean, functional digital experiences,
+              I’m a developer focused on clean, functional digital experiences,
               learning React and exploring AI to build practical tools.
             </motion.p>
 
@@ -128,7 +128,7 @@ export default function Home() {
                   target="_blank"
                   aria-label={label}
                   rel="noopener noreferrer"
-                  variants={glowVarients}
+                  variants={glowVariants}
                   initial="initial"
                   whileHover="hover"
                   whileTap="tap"
