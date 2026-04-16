@@ -99,7 +99,8 @@ export default function Contact() {
     } catch (err) {
       console.error("EmailJS Error:", err);
       // Fallback to error object string or err.text if provided by emailjs
-      setStatus(`error: ${err?.text || err?.message || 'Unknown setup error'}`);
+      const errorMessage = err?.text || err?.message || (typeof err === 'string' ? err : 'Unknown setup error');
+      setStatus(`error: ${errorMessage}`);
     }
   };
 
