@@ -72,15 +72,20 @@ export default function Contact() {
     setStatus("sending");
 
     try {
+      console.log("EmailJS options:", { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY });
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
         {
-          ...formData,
+          name: formData.name,
+          email: formData.email,
+          service: formData.service,
+          budget: formData.budget,
+          idea: formData.idea,
           from_name: formData.name,
           reply_to: formData.email,
         },
-        PUBLIC_KEY
+        { publicKey: PUBLIC_KEY }
       );
       setStatus("success");
       setFormData({
@@ -93,7 +98,8 @@ export default function Contact() {
       setErrors({});
     } catch (err) {
       console.error("EmailJS Error:", err);
-      setStatus("error");
+      // Fallback to error object string or err.text if provided by emailjs
+      setStatus(`error: ${err?.text || err?.message || 'Unknown setup error'}`);
     }
   };
 
@@ -249,7 +255,7 @@ export default function Contact() {
                 className={`text-sm ${
                   status === "success"
                     ? "text-green-400"
-                    : status === "error"
+                    : status?.startsWith("error")
                     ? "text-red-400"
                     : "text-yellow-400"
                 }`}
@@ -258,6 +264,8 @@ export default function Contact() {
                   ? "sending..."
                   : status === "success"
                   ? "Message sent successfully ✅"
+                  : status?.startsWith("error: ")
+                  ? `Something went wrong: ${status.replace('error: ', '')} ❌`
                   : "Something went wrong ❌"}
               </p>
             )}
