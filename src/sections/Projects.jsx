@@ -1,197 +1,314 @@
-import { motion } from "framer-motion";
-import { FiExternalLink, FiGithub } from "react-icons/fi";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiExternalLink, FiGithub, FiCheckCircle, FiLayers } from "react-icons/fi";
+import horizonStayHero from "../assets/horizon-stay-hero.png";
+import artisanCafeHero from "../assets/artisan-cafe-hero.png";
+import portfolioHero from "../assets/portfolio-hero.png";
 
 const projects = [
   {
+    id: "horizon-stay",
     title: "Horizon Stay",
-    tagline: "Hotel Management SaaS Dashboard",
+    tagline: "Hotel Management SaaS & Operations Dashboard",
+    category: "Full-Stack SaaS",
+    image: horizonStayHero,
     description:
-      "A production-grade hotel management system with booking CRUD, cabin management, revenue analytics, and guest tracking. Features a dark-mode dashboard with real-time data, interactive charts, and full authentication.",
-    tech: ["React 18", "Supabase", "React Query", "Styled Components", "Recharts", "Vite"],
+      "A production-grade hotel management web application featuring end-to-end booking workflows, real-time cabin management, revenue analytics, and authenticated administrative operations.",
+    features: [
+      "Real-time booking CRUD & cabin availability tracking",
+      "Interactive sales & occupancy charts powered by Recharts",
+      "Secure Supabase authentication and Row Level Security (RLS)",
+      "Optimized remote state caching using React Query",
+    ],
+    tech: ["React 19", "Supabase", "React Query", "Styled Components", "Recharts", "Vite"],
     liveUrl: "https://horizon-stay.vercel.app",
     githubUrl: "https://github.com/Pratyaksh1507/horizon-stay",
-    gradient: "from-indigo-600 via-purple-600 to-indigo-800",
-    accentColor: "#818cf8",
+    badge: "Featured SaaS",
+    accentColor: "#00d9f5",
   },
   {
+    id: "artisan-cafe",
     title: "Artisan Cafe",
-    tagline: "Modern Specialty Cafe Platform",
+    tagline: "Modern Specialty Cafe & E-Commerce Platform",
+    category: "Frontend & Next.js",
+    image: artisanCafeHero,
     description:
-      "A sleek, responsive cafe website with an interactive menu, real-time order system, admin dashboard, and newsletter signup. Built with a mobile-first approach and integrated with Supabase for backend operations.",
-    tech: ["Next.js 14", "Tailwind CSS", "Supabase", "Vercel", "React"],
+      "A sleek, responsive digital ordering platform for a specialty cafe. Offers an interactive menu, cart and order checkout flow, admin catalog management, and automated newsletter onboarding.",
+    features: [
+      "Next.js 14 App Router with Server-Side Rendering (SSR)",
+      "Supabase backend for dynamic menu items and orders",
+      "Mobile-first responsive UX with fluid micro-interactions",
+      "Admin portal for product catalog updates and inventory",
+    ],
+    tech: ["Next.js 14", "Tailwind CSS", "Supabase", "React", "Vercel"],
     liveUrl: "https://cafe-site-five.vercel.app",
     githubUrl: "https://github.com/Pratyaksh1507/cafe-site",
-    gradient: "from-amber-700 via-orange-700 to-amber-900",
-    accentColor: "#fbbf24",
+    badge: "E-Commerce",
+    accentColor: "#00f5a0",
   },
   {
-    title: "Developer Portfolio",
-    tagline: "Personal Website & Showcase",
+    id: "portfolio-v2",
+    title: "Developer Portfolio (v2)",
+    tagline: "High-Performance Personal Showcase",
+    category: "Creative Web",
+    image: portfolioHero,
     description:
-      "This very site — a high-performance portfolio with particle effects, scroll-driven animations, an infinite skills carousel, and a typewriter hero. Built for speed with compressed assets and semantic HTML.",
-    tech: ["React 19", "Framer Motion", "Tailwind CSS", "EmailJS", "Vite"],
+      "An engineered personal website featuring custom spring-interpolated physics cursor, ambient canvas particle stardust, accessible colorways, and integrated EmailJS client gateway.",
+    features: [
+      "Tailwind CSS v4 and Framer Motion spring physics",
+      "Lightweight canvas particle simulation with high-DPR scaling",
+      "Client-side verified EmailJS contact pipeline",
+      "100/100 Lighthouse performance and SEO best practices",
+    ],
+    tech: ["React 19", "Tailwind CSS v4", "Framer Motion", "EmailJS", "Vite"],
     liveUrl: "#home",
     githubUrl: "https://github.com/Pratyaksh1507",
-    gradient: "from-emerald-600 via-teal-600 to-cyan-800",
-    accentColor: "#34d399",
+    badge: "Personal Brand",
+    accentColor: "#38bdf8",
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.2 },
-  },
-};
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
+const categories = ["All", "Full-Stack SaaS", "Frontend & Next.js", "Creative Web"];
 
 export default function Projects() {
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredProjects =
+    activeFilter === "All"
+      ? projects
+      : projects.filter((p) => p.category === activeFilter);
+
   return (
     <section
       id="projects"
-      className="min-h-screen w-full relative bg-black text-white overflow-hidden py-20 sm:py-28"
+      className="relative w-full py-24 bg-[#080b11] text-white overflow-hidden border-t border-white/[0.04]"
     >
-      {/* Ambient glows */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-20 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-indigo-600/20 to-purple-600/10 blur-[120px]" />
-        <div className="absolute bottom-1/4 -right-20 w-[350px] h-[350px] rounded-full bg-gradient-to-r from-amber-600/15 to-orange-600/10 blur-[120px]" />
+      {/* Ambient background glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 -left-28 w-[500px] h-[500px] rounded-full bg-[#00d9f5]/8 blur-[160px]" />
+        <div className="absolute bottom-1/4 -right-28 w-[500px] h-[500px] rounded-full bg-[#00f5a0]/8 blur-[160px]" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
-        {/* Section header */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
+          className="text-center max-w-2xl mx-auto mb-12"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63]">
-            My Work
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-semibold text-[#00f5a0] tracking-widest uppercase mb-3">
+            Selected Work
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
+            Featured{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f5a0] to-[#00d9f5]">
+              Projects.
+            </span>
           </h2>
-          <p className="mt-3 text-gray-400 text-lg">
-            Production-ready projects built with modern technologies
+          <p className="mt-3 text-slate-400 text-sm sm:text-base">
+            A showcase of production-ready applications, SaaS dashboards, and creative web engineering.
           </p>
         </motion.div>
 
-        {/* Project cards */}
-        <motion.div
-          className="flex flex-col gap-12 lg:gap-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {projects.map((project, idx) => (
-            <motion.article
-              key={project.title}
-              variants={cardVariants}
-              className="group relative rounded-2xl overflow-hidden border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm"
+        {/* Category Filters */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-14">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 ${
+                activeFilter === cat
+                  ? "bg-white text-black font-semibold shadow-[0_0_15px_rgba(255,255,255,0.3)] scale-[1.02]"
+                  : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08] border border-white/[0.06]"
+              }`}
             >
-              <div
-                className={`flex flex-col ${
-                  idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                }`}
-              >
-                {/* Preview area */}
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`relative lg:w-1/2 min-h-[280px] sm:min-h-[320px] bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
-                >
-                  {/* Grid pattern */}
-                  <div
-                    className="absolute inset-0 opacity-[0.07]"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-                      backgroundSize: "40px 40px",
-                    }}
-                  />
-                  {/* Project name overlay */}
-                  <div className="relative z-10 text-center px-8">
-                    <div
-                      className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white/90 tracking-tight leading-none"
-                      style={{ textShadow: "0 4px 30px rgba(0,0,0,0.3)" }}
-                    >
-                      {project.title.split(" ")[0]}
-                      <br />
-                      <span className="text-white/60">
-                        {project.title.split(" ").slice(1).join(" ")}
-                      </span>
-                    </div>
-                    <div className="mt-4 inline-flex items-center gap-2 text-white/70 text-sm font-medium bg-black/20 px-4 py-2 rounded-full backdrop-blur-sm">
-                      <FiExternalLink className="w-4 h-4" />
-                      View Live
-                    </div>
-                  </div>
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                </a>
-
-                {/* Content area */}
-                <div className="lg:w-1/2 p-8 sm:p-10 flex flex-col justify-center">
-                  <p
-                    className="text-sm font-semibold uppercase tracking-widest mb-2"
-                    style={{ color: project.accentColor }}
-                  >
-                    {project.tagline}
-                  </p>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-400 leading-relaxed text-base sm:text-lg mb-6">
-                    {project.description}
-                  </p>
-
-                  {/* Tech tags */}
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="text-xs font-medium px-3 py-1.5 rounded-full border border-white/10 text-gray-300 bg-white/[0.04]"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Action buttons */}
-                  <div className="flex gap-4">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] hover:scale-[1.03] transition-transform shadow-lg"
-                    >
-                      <FiExternalLink className="w-4 h-4" />
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] transition-colors"
-                    >
-                      <FiGithub className="w-4 h-4" />
-                      Source Code
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </motion.article>
+              {cat}
+            </button>
           ))}
+        </div>
+
+        {/* Projects List */}
+        <div className="flex flex-col gap-16">
+          <AnimatePresence>
+            {filteredProjects.map((project, idx) => {
+              const isEven = idx % 2 === 0;
+              return (
+                <motion.article
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.6 }}
+                  className="group relative rounded-3xl overflow-hidden glass-card border border-white/[0.08] p-4 sm:p-6 lg:p-8"
+                >
+                  <div
+                    className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${
+                      isEven ? "" : "lg:grid-flow-dense"
+                    }`}
+                  >
+                    {/* Browser Mockup Preview */}
+                    <div
+                      className={`lg:col-span-6 ${
+                        isEven ? "" : "lg:col-start-7"
+                      }`}
+                    >
+                      <a
+                        href={project.liveUrl}
+                        target={project.liveUrl.startsWith("http") ? "_blank" : "_self"}
+                        rel="noopener noreferrer"
+                        className="block group/mockup relative rounded-2xl overflow-hidden border border-white/[0.12] bg-[#0c1017] shadow-2xl transition-all duration-300 hover:border-[#00f5a0]/40"
+                      >
+                        {/* Browser Top Window Bar */}
+                        <div className="h-8 px-3.5 bg-white/[0.04] border-b border-white/[0.08] flex items-center justify-between">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                          </div>
+                          <div className="text-[10px] text-slate-400 font-mono px-3 py-0.5 rounded-md bg-white/[0.04] max-w-[200px] truncate">
+                            {project.liveUrl.replace("https://", "")}
+                          </div>
+                          <FiExternalLink className="w-3 h-3 text-slate-400 group-hover/mockup:text-[#00f5a0] transition-colors" />
+                        </div>
+
+                        {/* Project Screenshot / Image */}
+                        <div className="relative aspect-[16/10] overflow-hidden bg-[#07090e] flex items-center justify-center">
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/mockup:scale-[1.02]"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#080b11]/80 via-transparent to-transparent opacity-0 group-hover/mockup:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+                            <span className="text-xs font-semibold text-white bg-black/70 px-3 py-1 rounded-full backdrop-blur-md">
+                              Click to launch live app
+                            </span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+
+                    {/* Content / Details */}
+                    <div
+                      className={`lg:col-span-6 flex flex-col justify-center ${
+                        isEven ? "" : "lg:col-start-1"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <span
+                          className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
+                          style={{
+                            color: project.accentColor,
+                            backgroundColor: `${project.accentColor}15`,
+                            border: `1px solid ${project.accentColor}30`,
+                          }}
+                        >
+                          {project.badge}
+                        </span>
+                        <span className="text-xs text-slate-400 font-medium">
+                          {project.category}
+                        </span>
+                      </div>
+
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
+                        {project.title}
+                      </h3>
+
+                      <p className="text-sm font-medium text-slate-300 mb-4">
+                        {project.tagline}
+                      </p>
+
+                      <p className="text-sm text-slate-400 leading-relaxed mb-5">
+                        {project.description}
+                      </p>
+
+                      {/* Key features bullets */}
+                      <div className="space-y-2 mb-6">
+                        {project.features.map((feat, i) => (
+                          <div
+                            key={i}
+                            className="flex items-start gap-2 text-xs text-slate-300"
+                          >
+                            <FiCheckCircle className="w-3.5 h-3.5 text-[#00f5a0] flex-shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Tech Chips */}
+                      <div className="flex flex-wrap gap-1.5 mb-6">
+                        {project.tech.map((t) => (
+                          <span
+                            key={t}
+                            className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.08] text-slate-300"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Action Links */}
+                      <div className="flex items-center gap-3">
+                        <a
+                          href={project.liveUrl}
+                          target={project.liveUrl.startsWith("http") ? "_blank" : "_self"}
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-black bg-gradient-to-r from-[#00f5a0] to-[#00d9f5] hover:opacity-95 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_15px_rgba(0,245,160,0.25)]"
+                        >
+                          <FiExternalLink className="w-3.5 h-3.5" />
+                          Live Demo
+                        </a>
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold text-white bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                        >
+                          <FiGithub className="w-3.5 h-3.5 text-slate-300" />
+                          GitHub Repo
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+
+        {/* GitHub link banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-14 p-6 rounded-3xl bg-white/[0.02] border border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-white/[0.06] flex items-center justify-center text-white text-2xl">
+              <FiGithub />
+            </div>
+            <div>
+              <h4 className="text-base font-bold text-white">Want to see more code?</h4>
+              <p className="text-xs text-slate-400">
+                Explore open source repositories, algorithms, and experiments on GitHub.
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://github.com/Pratyaksh1507"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 transition-all"
+          >
+            Visit GitHub Profile
+            <FiExternalLink className="w-3.5 h-3.5 text-[#00f5a0]" />
+          </a>
         </motion.div>
       </div>
     </section>
   );
 }
+

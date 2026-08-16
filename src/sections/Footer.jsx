@@ -1,77 +1,116 @@
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import { motion } from "framer-motion";
+import { FiArrowUp, FiMail, FiHeart } from "react-icons/fi";
+import Logo from "../assets/Logo.png";
+
 const socials = [
-  { Icon: FaXTwitter, label: "X", href: "https://twitter.com/pratyaksh_kalsi" },
+  {
+    Icon: FaGithub,
+    label: "GitHub",
+    href: "https://github.com/Pratyaksh1507",
+  },
   {
     Icon: FaLinkedin,
     label: "LinkedIn",
     href: "https://linkedin.com/in/pratyakshkalsi",
   },
-  { Icon: FaGithub, label: "GitHub", href: "https://github.com/Pratyaksh1507" },
+  {
+    Icon: FaXTwitter,
+    label: "Twitter / X",
+    href: "https://twitter.com/pratyaksh_kalsi",
+  },
+  {
+    Icon: FiMail,
+    label: "Email",
+    href: "mailto:kalsi.pratyaksh@gmail.com",
+  },
 ];
 
-const glowVariants = {
-  initial: { scale: 1, y: 0, filter: "drop-shadow(0 0 0 rgba(0,0,0,0))" },
-  hover: {
-    scale: 1.2,
-    y: -3,
-    filter:
-      "drop-shadow(0 0 8px rgba(13,88,204,0.9)) drop-shadow(0 0 18px rgba(16,185,129,0.8))",
-    transition: { type: "spring", stiffness: 300, damping: 15 },
-  },
-  tap: { scale: 0.95, y: 0, transition: { duration: 0.08 } },
-};
+const links = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Contact", href: "#contact" },
+];
 
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="relative overflow-hidden bg-black text-center">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_60%_at_70%_35%,rgba(13,88,202,0.35),transparent_70%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_55%_at_30%_70%,rgba(16,185,129,0.30),transparent_70%)]" />
-      <motion.div
-        className="relative z-10 px-4 sm:px-8 lg:px-10 py-16 md:py-20 flex flex-col items-center text-center space-y-6"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1
-          className="font-semibold leading-none text-white text-center select-none"
-          style={{
-            fontSize: "clamp(3rem,5vw,14rem)",
-            letterSpacing: "0.02em",
-            lineHeight: 0.9,
-            padding: "0.3vw",
-            whiteSpace: "nowrap",
-            textShadow: "0 2px 18px rgba(0,0,0,0.45)",
-          }}
-        >
-          Pratyaksh Kalsi
-        </h1>
-        <div className="h-[3px] w-24 md:w-32 rounded-full bg-gradient-to-r from-[#0d58cc] via-cyan-300 to-emerald-400" />
-        <div className="flex gap-5 text-2xl md:text-3xl">
-          {socials.map(({ Icon, label, href }) => (
-            <motion.a
-              href={href}
-              key={label}
-              aria-label={label}
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={glowVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-              className="text-gray-300 transition-colors duration-200 inline-flex items-center justify-center"
+    <footer className="relative bg-[#05070a] border-t border-white/[0.06] text-white pt-16 pb-12 overflow-hidden">
+      {/* Subtle bottom ambient lighting */}
+      <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-[#00f5a0]/5 blur-[140px] rounded-full" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col gap-12">
+        {/* Main Footer Row */}
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 text-center md:text-left">
+          {/* Brand Info */}
+          <div className="flex flex-col items-center md:items-start max-w-sm">
+            <div className="flex items-center gap-3 mb-3">
+              <img src={Logo} alt="Logo" className="w-8 h-8 object-contain" />
+              <span className="text-xl font-bold text-white tracking-tight">
+                Pratyaksh Kalsi
+              </span>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Frontend engineer dedicated to crafting intuitive, performant, and memorable digital experiences. NIT Srinagar graduate.
+            </p>
+          </div>
+
+          {/* Quick Navigation */}
+          <div className="flex flex-wrap justify-center md:justify-start gap-6 text-xs font-semibold text-slate-300">
+            {links.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="hover:text-[#00f5a0] transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          {/* Social Icons & Back to Top */}
+          <div className="flex flex-col items-center md:items-end gap-4">
+            <div className="flex items-center gap-3">
+              {socials.map(({ Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex items-center justify-center w-9 h-9 rounded-full bg-white/[0.04] border border-white/[0.08] text-slate-300 hover:text-[#00f5a0] hover:border-[#00f5a0]/40 transition-all"
+                >
+                  <Icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
+
+            <button
+              onClick={scrollToTop}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold text-slate-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:text-white transition-all group"
             >
-              <Icon />
-            </motion.a>
-          ))}
+              <span>Back to top</span>
+              <FiArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform text-[#00f5a0]" />
+            </button>
+          </div>
         </div>
-        <p className="text-gray-300 italic max-w-xl">
-          "Code is like humor. When you have to explain it, it's bad."
-        </p>
-        <p className="text-gray-400 text-xs italic max-w-xl">
-          &copy; {new Date().getFullYear()} Pratyaksh Kalsi. All rights reserved
-        </p>
-      </motion.div>
+
+        {/* Bottom copyright line */}
+        <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+          <p>
+            &copy; {new Date().getFullYear()} Pratyaksh Kalsi. All rights reserved.
+          </p>
+          <p className="flex items-center gap-1.5 text-slate-400">
+            Built with React 19, Tailwind CSS v4 & Framer Motion
+          </p>
+        </div>
+      </div>
     </footer>
   );
 }
+
