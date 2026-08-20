@@ -14,9 +14,10 @@ export default function CustomCursor() {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Only enable on desktop pointer devices
+    // Only enable on desktop pointer devices with motion enabled
     const isFine = window.matchMedia("(pointer: fine)").matches;
-    if (!isFine) return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!isFine || prefersReducedMotion) return;
     setIsPointerDevice(true);
 
     const handleMouseMove = (e) => {
@@ -33,10 +34,10 @@ export default function CustomCursor() {
       setIsHovered(!!target);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseover", handleElementHover);
-    document.body.addEventListener("mouseleave", handleMouseLeave);
-    document.body.addEventListener("mouseenter", handleMouseEnter);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseover", handleElementHover, { passive: true });
+    document.body.addEventListener("mouseleave", handleMouseLeave, { passive: true });
+    document.body.addEventListener("mouseenter", handleMouseEnter, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);

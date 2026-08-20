@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FiCheckCircle, FiZap, FiLayout, FiCpu, FiCode, FiArrowUpRight } from "react-icons/fi";
-import p from "../assets/p.jpg";
+import p from "../assets/p.avif";
+
 
 const stats = [
   { value: "3+", label: "Live SaaS & Web Projects" },
@@ -87,6 +88,10 @@ export default function About() {
                 <img
                   src={p}
                   alt="Pratyaksh Kalsi"
+                  width="340"
+                  height="340"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#080b11] via-transparent to-transparent opacity-60" />

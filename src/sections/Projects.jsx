@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiExternalLink, FiGithub, FiCheckCircle, FiLayers } from "react-icons/fi";
-import horizonStayHero from "../assets/horizon-stay-hero.png";
-import artisanCafeHero from "../assets/artisan-cafe-hero.png";
-import portfolioHero from "../assets/portfolio-hero.png";
+import horizonStayHero from "../assets/horizon-stay-hero.avif";
+import artisanCafeHero from "../assets/artisan-cafe-hero.avif";
+import portfolioHero from "../assets/portfolio-hero.avif";
+
 
 const projects = [
   {
@@ -180,6 +181,10 @@ export default function Projects() {
                           <img
                             src={project.image}
                             alt={project.title}
+                            width="600"
+                            height="375"
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/mockup:scale-[1.02]"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#080b11]/80 via-transparent to-transparent opacity-0 group-hover/mockup:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">

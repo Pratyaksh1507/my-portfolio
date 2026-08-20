@@ -80,6 +80,15 @@ h3,
   .gradient-brand {
     background: linear-gradient(135deg, #00f5a0 0%, #00d9f5 50%, #38bdf8 100%);
   }
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
+  }
 }
 
 

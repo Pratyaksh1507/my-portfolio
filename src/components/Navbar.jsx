@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import OverlayMenu from "./OverlayMenu";
-import Logo from "../assets/Logo.png";
+import Logo from "../assets/Logo.avif";
 import { FiMenu, FiArrowUpRight, FiFileText } from "react-icons/fi";
 
 const navLinks = [
@@ -18,25 +18,45 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
+    // High-performance passive scroll detection
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      // Simple active section detection
-      const sections = navLinks.map((link) => link.href.substring(1));
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i]);
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(sections[i]);
-          break;
-        }
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // IntersectionObserver for zero-layout-thrashing active section tracking
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      root: null,
+      rootMargin: "-20% 0px -60% 0px",
+      threshold: 0,
+    });
+
+    navLinks.forEach((link) => {
+      const sectionEl = document.getElementById(link.href.substring(1));
+      if (sectionEl) observer.observe(sectionEl);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -58,7 +78,10 @@ export default function Navbar() {
               <img
                 src={Logo}
                 alt="Pratyaksh Kalsi"
+                width="24"
+                height="24"
                 className="w-6 h-6 object-contain"
+                decoding="async"
               />
             </div>
             <div className="flex flex-col">

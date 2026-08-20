@@ -1,6 +1,7 @@
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { FiArrowUp, FiMail, FiHeart } from "react-icons/fi";
-import Logo from "../assets/Logo.png";
+import Logo from "../assets/Logo.avif";
+
 
 const socials = [
   {
@@ -50,7 +51,15 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="flex flex-col items-center md:items-start max-w-sm">
             <div className="flex items-center gap-3 mb-3">
-              <img src={Logo} alt="Logo" className="w-8 h-8 object-contain" />
+              <img
+                src={Logo}
+                alt="Logo"
+                width="32"
+                height="32"
+                loading="lazy"
+                decoding="async"
+                className="w-8 h-8 object-contain"
+              />
               <span className="text-xl font-bold text-white tracking-tight">
                 Pratyaksh Kalsi
               </span>

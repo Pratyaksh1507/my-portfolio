@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { FiArrowDown, FiCopy, FiCheck, FiDownload, FiExternalLink } from "react-icons/fi";
 import { SiReact, SiNextdotjs, SiTailwindcss, SiSupabase } from "react-icons/si";
-import avator from "../assets/avator.png";
+import avator from "../assets/avator.avif";
+
 
 const socials = [
   {
@@ -207,6 +208,10 @@ export default function Home() {
               <img
                 src={avator}
                 alt="Pratyaksh Kalsi"
+                width="420"
+                height="525"
+                fetchpriority="high"
+                decoding="sync"
                 className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)]"
               />
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
+
 import {
   FiMail,
   FiSend,
@@ -79,6 +79,7 @@ export default function Contact() {
 
     try {
       if (SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY) {
+        const emailjs = (await import("@emailjs/browser")).default;
         await emailjs.send(
           SERVICE_ID,
           TEMPLATE_ID,

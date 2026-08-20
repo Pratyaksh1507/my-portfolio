@@ -1,15 +1,18 @@
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import ScrollProgress from "./components/ScrollProgress";
 import ParticlesBackground from "./components/ParticlesBackground";
 import Home from "./sections/Home";
-import About from "./sections/About";
-import Skills from "./sections/Skills";
-import Projects from "./sections/Projects";
-import Experience from "./sections/Experience";
-import Contact from "./sections/Contact";
-import Footer from "./sections/Footer";
+
+// Code-split below-the-fold sections for instant initial paint
+const About = lazy(() => import("./sections/About"));
+const Skills = lazy(() => import("./sections/Skills"));
+const Projects = lazy(() => import("./sections/Projects"));
+const Experience = lazy(() => import("./sections/Experience"));
+const Contact = lazy(() => import("./sections/Contact"));
+const Footer = lazy(() => import("./sections/Footer"));
 
 export default function App() {
   return (
@@ -17,7 +20,7 @@ export default function App() {
       className="relative min-h-screen bg-[#080b11] text-slate-100 selection:bg-[#00f5a0]/20 selection:text-[#00f5a0]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
       <ScrollProgress />
       <CustomCursor />
@@ -26,14 +29,18 @@ export default function App() {
 
       <main className="relative z-10">
         <Home />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
+        <Suspense fallback={<div className="min-h-[40vh]" />}>
+          <About />
+          <Skills />
+          <Projects />
+          <Experience />
+          <Contact />
+        </Suspense>
       </main>
 
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </motion.div>
   );
 }
